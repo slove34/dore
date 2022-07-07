@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="hayami生成器 : " />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>hayami生成器</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/slove34/dore">View on GitHub</a>
+
+          <h1 id="project_title">hayami生成器</h1>
+          <h2 id="project_tagline">不行，是真的不行，基本盘的不行。</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+          <table style="width:768px">
+              <tr>
+                  <th style="width:50%;">
+          <!--<h3>请依次填入以下信息……</h3>-->
+    <form name="info_form">
+    <p>标题：
+        hayami
+        对
+        <input type="text" name="i_to" value="" style="width:100px;" />
+        发表重要讲话
+    </p>
+    <p>正文</p>
+    <ol>
+        <li>
+            <input type="text" name="i_to" value="" style="width:150px;" /> 
+            不行
+        </li><li>
+            我身边有一些
+            <input type="text" name="i_who" value="" style="width:150px;" /> 
+        </li><li> 
+            即使
+            <input type="text" name="i_presume" value="" style="width:120px;" /> 
+        </li><li> 
+            但在某个时间点以后、就没有
+            <input type="text" name="i_nodo" value="" style="width:120px;" />
+            了。 
+        </li><li> 
+            当然也不是刻意去
+            <input type="text" name="i_pretend" value="" style="width:120px;" />
+        </li><li> 
+            有
+            <input type="text" name="i_honor" value="" style="width:120px;" />
+            的习惯
+        </li><li> 
+            (不是
+            <input type="text" name="i_clarify" value="" style="width:120px;" />
+            )
+        </li><li> 
+            (不只是
+            <input type="text" name="i_dislike" value="" style="width:120px;" />
+            )
+        </li><li> 
+            也别举什么
+            <input type="text" name="i_exclude" value="" style="width:120px;" />
+            的个例了
+        </li><li> 
+            不信你看看
+            <input type="text" name="i_example" value="" style="width:120px;" />
+        </li>
+    </ol>
+    <input type="button" name="button" value="生成" onclick="generate()" style="width:100px;" />
+    </form>
+              </th>
+              <th style="width:49%">
+        <textarea name="result" id="result" readonly="readonly" style="width:100%; height: 600px;"/>
+        </textarea>
+              </th>
+              </tr>
+          </table>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">hayami生成器</p>
+        <p>Forked from <a href="https://github.com/dkwingsmt/haha">hayami生成器</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    <script>
+
+function get_inputs() {
+    return document.querySelectorAll("form > p > input, form > ol > li > input");
+}
+
+var init_arrays = [];
+
+init_arrays.push({
+    i_to: "郭楠",
+    i_who: "女孩子",
+    i_presume: "身在国内",
+    i_nodo: "date 过中国男生",
+    i_pretend: "找外国人",
+    i_honor: "运动健身",
+    i_clarify: "gay",
+    i_dislike: "打游戏",
+    i_exclude: "Not all men",
+    i_example: "这条评论区"
+});
+
+
+
+function initialize(init_array) {
+
+    var inputs = get_inputs();
+    for(var i = 0; i < inputs.length; i++) {
+        inputs[i].value = init_array[inputs[i].name];
+    }
+    generate();
+}
+
+function generate() {
+    var inputs = get_inputs();
+    var result_text = result;
+
+    var template = "";
+    template += "我最后再暴言一句：{{i_to}}不行，是真的不行，基本盘的不行。";
+    template += "屎里找米，屎上雕花，行不行？当然可以。但何必呢？\n\n";
+    template += "我身边一些{{i_who}}，即使{{i_presume}}，但是在某个时间点后、就没有{{i_nodo}}了。";
+    template += "当然也不是刻意去{{i_pretend}}，但是你所能见到拥有温柔善良、细腻柔软、宽厚勇敢、";
+    template += "有审美和品味、有{{i_honor}}的习惯（不是{{i_clarify}}）、有自己的兴趣爱好（不只是{{i_dislike}}）的特质";
+    template += "就是不、可、能发生在{{i_to}}身上。\n\n";
+    template += "也别举什么{{i_exclude}}的个例了，我说的是基本盘。不行，就是真的不行 （不信你看看{{i_example}}";
+
+    for (var i = 0; i < inputs.length; i++) {
+        var regexp = new RegExp("\{\{"+inputs[i].name+"\}\}", "g");
+        template = template.replace(regexp, inputs[i].value, "g");
+    }
+    result_text.value = template;
+}
+
+initialize(init_arrays[Math.floor(Math.random() * init_arrays.length)]);
+    </script>
+
+  </body>
+</html>
